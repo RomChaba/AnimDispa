@@ -178,6 +178,19 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Content\img\chat1.jpg" />
+    <Content Include="Content\img\chat2.jpg" />
+    <Content Include="Content\img\chien1.jpg" />
+    <Content Include="Content\img\chien2.jpeg" />
+    <Content Include="Content\img\cochondinde1.jpg" />
+    <Content Include="Content\img\cochondinde2.jpg" />
+    <Content Include="Content\img\lapin.jpg" />
+    <Content Include="Content\img\lapin2.jpg" />
+    <Content Include="Content\img\poule1.jpg" />
+    <Content Include="Content\img\poule2.jpg" />
+    <Content Include="Content\img\serpent1.jpg" />
+    <Content Include="Content\img\tortue1.jpg" />
+    <Content Include="Content\img\tortue2.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
