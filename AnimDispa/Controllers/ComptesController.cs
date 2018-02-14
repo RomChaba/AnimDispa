@@ -46,7 +46,7 @@ namespace AnimDispa.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Prenom,Login,Password,Mail,Telephone,Adresse,CodePostal,Ville")] Comptes comptes)
+        public ActionResult Create([Bind(Include = "Nom,Prenom,Login,Password,Mail,Telephone,Adresse,CodePostal,Ville")] Comptes comptes)
         {
             if (ModelState.IsValid)
             {
