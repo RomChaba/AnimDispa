@@ -1,13 +1,16 @@
 ﻿using AnimDispa.Models;
+using DAL;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Web;
 
 namespace AnimDispa.DAL
 {
-    public class DbAnimaux
-    {
+    public class DbAnimaux {
+
         #region Singleton
 
         private static DbAnimaux _instance;
@@ -23,37 +26,39 @@ namespace AnimDispa.DAL
         #region Requêtes const
 
         private const string RQT_GET_ONE_ANIMAUX = "SELECT * FROM Animaux WHERE id = @id";
-        
-        private const string RQT_ADD_RACE = "INSERT INTO Animaux VALUES (@nom, @poids, @couleur, @tatouage, @puce, @idComptes, @idRaces, @idStatuts, @idVille, @photoMain)";
-
-        /*private const string RQT_GET_LAST_ADDED = "SELECT IDENT_CURRENT('Course')";*/
+        private const string RQT_GET_ALL_ANIMAUX = "SELECT * FROM Animaux";
+        private const string RQT_ADD_ANIMAUX = "INSERT INTO Animaux VALUES (@nom, @poids, @couleur, @tatouage, @puce, @idComptes, @idRaces, @idStatuts, @idVille, @photoMain)";
+        private const string RQT_GET_LAST_ADDED = "SELECT IDENT_CURRENT('Animaux')";
 
         #endregion
 
         #region Public methods
 
-        public int AddAnimaux(Animaux animaux)
-        {
-            if (race == null) return 0;
+        public int Add(Animaux animaux) {
+            if (animaux == null) return 0;
 
             int retour = 0;
 
-            try
-            {
+            try {
                 var instance = new DbTools();
 
                 // Préparation d'une transaction
                 var transac = instance.CreerTransaction();
 
                 // Exécution de la requête d'ajout + on l'inclut dans la transaction
-                var commandAdd = instance.CreerRequete(RQT_ADD_RACE);
-                instance.CreerParametre(commandAdd, "@title", race.Title);
-                instance.CreerParametre(commandAdd, "@description", race.Description);
-                instance.CreerParametre(commandAdd, "@datestart", race.DateStart);
-                instance.CreerParametre(commandAdd, "@dateend", race.DateEnd);
-                instance.CreerParametre(commandAdd, "@ville", race.Town);
-                commandAdd.Transaction = transac;
-                commandAdd.ExecuteNonQuery();
+                var animal = instance.CreerRequete(RQT_ADD_ANIMAUX);
+                instance.CreerParametre(animal, "@nom", animaux.Nom);
+                instance.CreerParametre(animal, "@poids", animaux.Poids);
+                instance.CreerParametre(animal, "@couleur", animaux.Couleur);
+                instance.CreerParametre(animal, "@tatouage", animaux.Tatouage);
+                instance.CreerParametre(animal, "@puce", animaux.Puce);
+                instance.CreerParametre(animal, "@idComptes", animaux.IdComptes);
+                instance.CreerParametre(animal, "@idRaces", animaux.IdRaces);
+                instance.CreerParametre(animal, "@idStatuts", animaux.IdStatutsAnimaux);
+                instance.CreerParametre(animal, "@idVille", animaux.IdVilles);
+                instance.CreerParametre(animal, "@photoMain", animaux.PhotoPrincipale);
+                animal.Transaction = transac;
+                animal.ExecuteNonQuery();
 
                 // Exécution de la requête de recupération du dernier id ajouté + on l'inclut dans la transaction
                 var commandSelect = instance.CreerRequete(RQT_GET_LAST_ADDED);
@@ -77,117 +82,85 @@ namespace AnimDispa.DAL
             return retour;
         }
 
-        public List<Race> GetRace()
+        public List<Animaux> GetAll()
         {
-            List<Race> list = new List<Race>();
+            List<Animaux> list = new List<Animaux>();
 
             var instance = new DbTools();
-            var command = instance.CreerRequete(RQT_GET_RACE);
+            var command = instance.CreerRequete(RQT_GET_ALL_ANIMAUX);
 
             DbDataReader reader = command.ExecuteReader();
-            return this.BuildRaceList(reader);
+            return this.BuildAnimauxList(reader);
         }
 
-        public Race GetRace(int id)
+        public Animaux GetOne(int id)
         {
             var instance = new DbTools();
-            var command = instance.CreerProcedureStockee(RQT_GET_RACE_PS);
-            instance.CreerParametre(command, "@id", id, ParameterDirection.Input, DbType.Int32);
+            var animal = instance.CreerProcedureStockee(RQT_GET_ONE_ANIMAUX);
+            instance.CreerParametre(animal, "@id", id, ParameterDirection.Input, DbType.Int32);
 
-            DbDataReader reader = command.ExecuteReader();
-            return this.BuildRace(reader);
+            DbDataReader reader = animal.ExecuteReader();
+            return this.BuildAnimaux(reader);
         }
 
         #endregion
 
         #region Private methods
 
-        private List<Race> BuildRaceList(DbDataReader reader)
+        private List<Animaux> BuildAnimauxList(DbDataReader reader)
         {
-            List<Race> list = new List<Race>();
+            List<Animaux> list = new List<Animaux>();
 
             while (reader.Read())
             {
-                var raceId = reader.GetInt32(reader.GetOrdinal("CId"));
+                var animauxId = reader.GetInt32(reader.GetOrdinal("id"));
 
-                Race r;
-                if (list.All(x => x.Id != raceId))
+                Animaux a;
+                if (list.All(x => x.Id != animauxId))
                 {
-                    r = new Race
+                    a = new Animaux
                     {
-                        Id = raceId,
-                        Title = reader.GetString(reader.GetOrdinal("CTitre")),
-                        Description = reader.GetString(reader.GetOrdinal("CDescription")),
-                        DateStart = reader.GetDateTime(reader.GetOrdinal("CDateStart")),
-                        DateEnd = reader.GetDateTime(reader.GetOrdinal("CDateEnd")),
-                        Town = reader.GetString(reader.GetOrdinal("CVille")),
+                        Id = animauxId,
+                        Nom = reader.GetString(reader.GetOrdinal("nom")),
+                        Poids = reader.GetFloat(reader.GetOrdinal("poids")),
+                        Couleur = reader.GetString(reader.GetOrdinal("couleur")),
+                        Tatouage = reader.GetString(reader.GetOrdinal("tatouage")),
+                        Puce = reader.GetString(reader.GetOrdinal("puce"))
+                        /*,IdComptes = reader.Get(reader.GetOrdinal("CVille")),
                         Competitors = new List<Competitor>(),
-                        Organisers = new List<Organizer>()
+                        Organisers = new List<Organizer>()*/
                     };
-                    list.Add(r);
+                    list.Add(a);
                 }
                 else
                 {
-                    r = list.Single(x => x.Id == raceId);
-                }
-
-                // Récupération du type de participans
-                var isCompetitor = reader.GetBoolean(reader.GetOrdinal("PctEstCompetiteur"));
-                var isOrganiser = reader.GetBoolean(reader.GetOrdinal("PctEstOrganisateur"));
-                if (isCompetitor)
-                {
-                    Competitor c = new Competitor
-                    {
-                        Id = reader.GetInt32(reader.GetOrdinal("PId")),
-                        Nom = reader.GetString(reader.GetOrdinal("PNom")),
-                        Prenom = reader.GetString(reader.GetOrdinal("PPrenom")),
-                        Email = reader.GetString(reader.GetOrdinal("PEmail")),
-                        Phone = reader.GetString(reader.GetOrdinal("PTelephone")),
-                        DateNaissance = reader.GetDateTime(reader.GetOrdinal("PDateNaissance")),
-                        Race = r
-                    };
-                    r.Competitors.Add(c);
-                }
-
-                if (isOrganiser)
-                {
-                    Organizer o = new Organizer
-                    {
-                        Id = reader.GetInt32(reader.GetOrdinal("PId")),
-                        Nom = reader.GetString(reader.GetOrdinal("PNom")),
-                        Prenom = reader.GetString(reader.GetOrdinal("PPrenom")),
-                        Email = reader.GetString(reader.GetOrdinal("PEmail")),
-                        Phone = reader.GetString(reader.GetOrdinal("PTelephone")),
-                        DateNaissance = reader.GetDateTime(reader.GetOrdinal("PDateNaissance"))
-                    };
-                    r.Organisers.Add(o);
+                    a = list.Single(x => x.Id == animauxId);
                 }
             }
-
             return list;
         }
 
-        private Race BuildRace(DbDataReader reader)
+        private Animaux BuildAnimaux(DbDataReader reader)
         {
             // On lit la première ligne
             var result = reader.Read();
 
-            Race r = null;
+            Animaux a = null;
             if (result)
             {
                 // On construit l'objet
-                r = new Race
+                a = new Animaux
                 {
-                    Id = reader.GetInt32(reader.GetOrdinal("CId")),
-                    Title = reader.GetString(reader.GetOrdinal("CTitre")),
-                    Description = reader.GetString(reader.GetOrdinal("CDescription")),
-                    DateStart = reader.GetDateTime(reader.GetOrdinal("CDateStart")),
-                    DateEnd = reader.GetDateTime(reader.GetOrdinal("CDateEnd")),
-                    Town = reader.GetString(reader.GetOrdinal("CVille"))
+                    Id = reader.GetInt32(reader.GetOrdinal("id")),
+                    Nom = reader.GetString(reader.GetOrdinal("nom")),
+                    Poids = reader.GetFloat(reader.GetOrdinal("poids")),
+                    Couleur = reader.GetString(reader.GetOrdinal("couleur")),
+                    Tatouage = reader.GetString(reader.GetOrdinal("tatouage")),
+                    Puce = reader.GetString(reader.GetOrdinal("puce"))
                 };
             }
 
-            return r;
+            return a;
         }
 
         #endregion
