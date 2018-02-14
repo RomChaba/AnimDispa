@@ -2,10 +2,6 @@
 {
     public class StatutsComptes
     {
-        public StatutsComptes()
-        {
-
-        }
         public StatutsComptes(int id, string libelle)
         {
             Id = id;
