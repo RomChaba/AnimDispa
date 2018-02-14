@@ -157,7 +157,11 @@
     <Compile Include="Models\Races.cs" />
     <Compile Include="Models\StatutsAnimaux.cs" />
     <Compile Include="Models\Types.cs" />
-    <Compile Include="Models\Config.cs" />
+	<Compile Include="Models\Comptes.cs" />
+	<Compile Include="Models\Messages.cs" />
+	<Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\StatutsComptes.cs" />
+	<Compile Include="Models\Config.cs" />
     <Compile Include="Models\Photos.cs" />
     <Compile Include="Models\Villes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
