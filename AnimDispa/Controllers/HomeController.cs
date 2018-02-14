@@ -1,5 +1,4 @@
-﻿using AnimDispa.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,13 +6,10 @@ using System.Web.Mvc;
 
 namespace AnimDispa.Controllers
 {
-    public class HomeController : Controller {
-
-        private AnimDispaContext db = new AnimDispaContext();
-
+    public class HomeController : Controller
+    {
         public ActionResult Index()
         {
-            Animaux animaux = db.
             return View();
         }
 

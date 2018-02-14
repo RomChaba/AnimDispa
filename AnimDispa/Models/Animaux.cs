@@ -29,8 +29,5 @@ namespace AnimDispa.Models
             Puce = puce;
             PhotoPrincipale = photoPrincipale;
         }
-
-        public Animaux() {
-
-        }
+    }
 }
