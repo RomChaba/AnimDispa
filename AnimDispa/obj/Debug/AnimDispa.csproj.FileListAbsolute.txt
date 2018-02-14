@@ -50,3 +50,7 @@ E:\AnimDispa\AnimDispa\bin\Newtonsoft.Json.xml
 E:\AnimDispa\AnimDispa\obj\Debug\AnimDispa.csprojResolveAssemblyReference.cache
 E:\AnimDispa\AnimDispa\obj\Debug\AnimDispa.dll
 E:\AnimDispa\AnimDispa\obj\Debug\AnimDispa.pdb
+E:\AnimDispa\AnimDispa\bin\EntityFramework.dll
+E:\AnimDispa\AnimDispa\bin\EntityFramework.SqlServer.dll
+E:\AnimDispa\AnimDispa\bin\EntityFramework.xml
+E:\AnimDispa\AnimDispa\bin\EntityFramework.SqlServer.xml
