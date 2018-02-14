@@ -1,4 +1,5 @@
 
 .vs/*
 AnimDispa/bin/*
+AnimDispa/obj/*
 *.cache
