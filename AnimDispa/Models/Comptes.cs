@@ -41,7 +41,8 @@ namespace AnimDispa.Models
         [ForeignKey("Id")]
         public Roles IdRoles { get; set; }
 
-        
+        public virtual ICollection<Animaux> LesAnimaux { get; set; }
+
 
     }
 
