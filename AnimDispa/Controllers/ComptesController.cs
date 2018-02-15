@@ -123,5 +123,30 @@ namespace AnimDispa.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Comptes/Connexion
+        public ActionResult Connexion()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Connexion(string login,string password)
+        {
+            if (ModelState.IsValid)
+            {
+                List<Comptes> comp = null;
+                comp = db.Comptes.Where(x=>x.Login == login).Where(x=>x.Password == password).ToList();
+
+                if (comp.Count == 0)
+                {
+                    return View();
+                    
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
     }
 }

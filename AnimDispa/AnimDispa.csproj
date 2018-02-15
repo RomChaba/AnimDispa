@@ -237,6 +237,7 @@
     <Content Include="Views\Comptes\Details.cshtml" />
     <Content Include="Views\Comptes\Edit.cshtml" />
     <Content Include="Views\Comptes\Index.cshtml" />
+    <Content Include="Views\Comptes\Connexion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
