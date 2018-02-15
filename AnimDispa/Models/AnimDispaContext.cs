@@ -21,5 +21,7 @@ namespace AnimDispa.Models
 
         public System.Data.Entity.DbSet<AnimDispa.Models.Comptes> Comptes { get; set; }
         public System.Data.Entity.DbSet<AnimDispa.Models.Animaux> Animaux { get; set; }
+        public System.Data.Entity.DbSet<AnimDispa.Models.Villes> Villes { get; set; }
+        
     }
 }

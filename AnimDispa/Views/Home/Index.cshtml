@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable < AnimDispa.Models.Animaux >
+    
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -20,30 +22,29 @@
 
 
 <div class="row">
-    <h2>Liste des dernieres disparitions : </h2>
+    <h2>Liste des dernières disparitions : </h2>
 
-    @for (int i = 0; i < 10; i++)
-    {
-        @* Div a repeter en boucle *@
+    @foreach (var item in Model) {
+
         <div class="col-sm-10 col-sm-offset-1 well">
 
-            <img class="col-sm-3 img-responsive" src="~/content/img/chat1.jpg" alt="Image de l'animal'" />
+            <img class="col-sm-3 img-responsive" src="~/content/img/@Html.DisplayFor(modelItem => item.PhotoPrincipale)" alt="Image de l'animal'" />
 
             <div class="col-sm-9">
-                <h3 style="margin-top:0px">Grincheux <i class="text-danger pull-right">Disparu</i></h3>
+                <h3 style="margin-top:0px">@Html.DisplayFor(modelItem => item.Nom) - (@Html.DisplayFor(modelItem => item.Race.Type.Libelle))<i class="pull-right" style="color : @Html.DisplayFor(modelItem => item.StatutAnimal.Couleur)">@Html.DisplayFor(modelItem => item.StatutAnimal.Libelle)</i></h3>
                 <div class="col-md-12">
                     <table class="table table-condensed table-striped table-bordered">
                         <tr>
                             @*<td>Nom : Grincheux</td>*@
                             <td class="col-sm-4 fond-col">Race :</td>
                             <td class="col-sm-4 fond-col">Couleur :</td>
-                            <td class="col-sm-4 fond-col">Ville :</td
+                            <td class="col-sm-4 fond-col">Ville :</td>
                         </tr>
                         <tr>
                             @*<td>Nom : Grincheux</td>*@
-                            <td class="valeur">Angora</td>
-                            <td class="valeur">Marron, blanc, noir</td>
-                            <td class="valeur">Nantes</td>
+                            <td class="valeur">@Html.DisplayFor(modelItem => item.Race.Libelle)</td>
+                            <td class="valeur">@Html.DisplayFor(modelItem => item.Couleur)</td>
+                            <td class="valeur">@Html.DisplayFor(modelItem => item.Ville.Libelle)</td>
                         </tr>
                         <tr>
                             <td class="col-sm-4 fond-col">Tatouage :</td>
@@ -51,26 +52,17 @@
                             <td class="col-sm-4 fond-col">Poids :</td>
                         </tr>
                         <tr>
-                            <td class="valeur">47-22-5-GSK</td>
-                            <td class="valeur">Oui</td>
-                            <td class="valeur">5Kg</td>
+                            <td class="valeur">@Html.DisplayFor(modelItem => item.Tatouage)</td>
+                            <td class="valeur">@Html.DisplayFor(modelItem => item.Puce)</td>
+                            <td class="valeur">@Html.DisplayFor(modelItem => item.Poids) Kg</td>
                             
                         </tr>
                     </table>
                 </div>
                 @*<p>C'est mon chat préféré parmis tous les chat que je possède</p>*@
-                <p class="pull-right">Propriétaire : Mère Michèle</p>
+                <p class="pull-right">Propriétaire : @Html.DisplayFor(modelItem => item.Compte.Prenom) @Html.DisplayFor(modelItem => item.Compte.Nom)</p>
                 <button class="btn btn-primary">Voir plus</button>
             </div>
         </div>
-        @* FIN Div a repeter en boucle *@
     }
-
-
-
-
-
-
-
-
 </div>
