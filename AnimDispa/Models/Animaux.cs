@@ -32,8 +32,8 @@ namespace AnimDispa.Models
         public int idStatut { get; set; }
         [ForeignKey(nameof(idStatut))]
         public virtual StatutsAnimaux StatutAnimal { get; set; }
-
-
+        
+        public virtual ICollection<Messages> LesMessages { get; set; }
 
 
         public Animaux()

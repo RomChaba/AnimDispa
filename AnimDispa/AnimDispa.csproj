@@ -156,6 +156,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\AnimauxController.cs" />
     <Compile Include="Controllers\ComptesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -173,6 +175,7 @@
     <Compile Include="Models\StatutsComptes.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Photos.cs" />
+    <Compile Include="Models\ViewModelAnimaux.cs" />
     <Compile Include="Models\Villes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -238,6 +241,8 @@
     <Content Include="Views\Comptes\Edit.cshtml" />
     <Content Include="Views\Comptes\Index.cshtml" />
     <Content Include="Views\Comptes\Connexion.cshtml" />
+    <Content Include="Views\Animaux\Index.cshtml" />
+    <Content Include="Views\Messages\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

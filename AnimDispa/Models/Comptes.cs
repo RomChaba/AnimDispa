@@ -8,6 +8,30 @@ namespace AnimDispa.Models
 {
     public class Comptes
     {
+
+        public int Id { get; set; }
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string Mail { get; set; }
+        public string Tel { get; set; }
+        public string Adresse { get; set; }
+        public string CodePostal { get; set; }
+        public string Ville { get; set; }
+
+        public int idRoles { get; set; }
+        [ForeignKey(nameof(idRoles))]
+        public virtual Roles Role { get; set; }
+
+        public int idStatutsComptes { get; set; }
+        [ForeignKey(nameof(idStatutsComptes))]
+        public virtual StatutsComptes StatutCompte { get; set; }
+
+        public virtual ICollection<Animaux> LesAnimaux { get; set; }
+        public virtual ICollection<Messages> LesMessages { get; set; }
+
+
         public Comptes()
         {
 
@@ -25,25 +49,6 @@ namespace AnimDispa.Models
             CodePostal = codePostal;
             Ville = ville;
         }
-
-        public int Id { get; set; }
-        public string Nom { get; set; }
-        public string Prenom { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public string Mail { get; set; }
-        public string Tel { get; set; }
-        public string Adresse { get; set; }
-        public string CodePostal { get; set; }
-        public string Ville { get; set; }
-        [ForeignKey ("Id")]
-        public StatutsComptes IdStatutsComptes { get; set; }
-        [ForeignKey("Id")]
-        public Roles IdRoles { get; set; }
-
-        public virtual ICollection<Animaux> LesAnimaux { get; set; }
-
-
     }
 
 }
