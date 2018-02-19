@@ -150,12 +150,20 @@ namespace AnimDispa.Controllers
 
                     var compteId = db.Comptes.Where(x => x.Login == login).Where(x => x.Password == password).First();
                     Session["IdConnecte"] = compteId.Id;
+                    Session["compteConnecter"] = compteId;
                     return RedirectToAction("Index");
                 }
 
             }
 
             return View();
+        }
+        public ActionResult Deconnexion(string login, string password)
+        {
+            Session["IdConnecte"] = null;
+            Session["compteConnecter"] = null;
+            return RedirectToAction("Index");
+           
         }
     }
 }

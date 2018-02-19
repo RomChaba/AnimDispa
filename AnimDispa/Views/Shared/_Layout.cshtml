@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,11 +22,25 @@
                 @Html.ActionLink("AnimDispa", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="width: calc(100% - 88px);   ">
                     <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Les Comptes", "Index", "Comptes")</li>
+
+
+                    @if (Session["IdConnecte"] != null)
+                    {
+                        <li style="float:right">@Html.ActionLink("Déconnexion", "Deconnexion", "Comptes")</li>
+                    }
+                    else
+                    {
+                        <li style="float:right">@Html.ActionLink("Inscription", "Create", "Comptes")</li>
+                        <li style="float:right">@Html.ActionLink("Connexion", "Connexion", "Comptes")</li>
+                    }
+
+
+
+
                 </ul>
             </div>
         </div>
