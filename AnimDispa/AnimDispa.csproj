@@ -156,6 +156,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\RacesController.cs" />
+    <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\AnimauxController.cs" />
     <Compile Include="Controllers\ComptesController.cs" />
@@ -243,6 +245,12 @@
     <Content Include="Views\Comptes\Connexion.cshtml" />
     <Content Include="Views\Animaux\Index.cshtml" />
     <Content Include="Views\Messages\Create.cshtml" />
+    <Content Include="Views\Types\Index.cshtml" />
+    <Content Include="Views\Types\Edit.cshtml" />
+    <Content Include="Views\Types\Add.cshtml" />
+    <Content Include="Views\Races\Index.cshtml" />
+    <Content Include="Views\Races\Edit.cshtml" />
+    <Content Include="Views\Races\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

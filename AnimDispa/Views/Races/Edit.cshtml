@@ -1,0 +1,17 @@
+﻿@model AnimDispa.Models.Races
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+<br />
+
+<form action="/Races/EditConfirm" method="POST">
+        <input type="hidden" name="id" value="@Html.DisplayFor(model => model.Id)" />
+        <label>Libelle : </label>
+        <input type="text" name="libelle" required class="form-control text-box single-line" value="@Html.DisplayFor(model => model.Libelle)" />
+        <br />
+        <input type="submit" class="btn btn-success" />
+        @Html.ActionLink("Retour", "Index", "Races", new { id = @Html.DisplayFor(model => model.IdType) }, htmlAttributes: new { @class = "btn btn-primary" })
+</form>

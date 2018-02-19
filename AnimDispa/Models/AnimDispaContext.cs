@@ -23,6 +23,8 @@ namespace AnimDispa.Models
         public System.Data.Entity.DbSet<AnimDispa.Models.Animaux> Animaux { get; set; }
         public System.Data.Entity.DbSet<AnimDispa.Models.Villes> Villes { get; set; }
         public System.Data.Entity.DbSet<AnimDispa.Models.Messages> Messages { get; set; }
+        public System.Data.Entity.DbSet<AnimDispa.Models.Types> Types { get; set; }
+        public System.Data.Entity.DbSet<AnimDispa.Models.Races> Races { get; set; }
 
     }
 }
