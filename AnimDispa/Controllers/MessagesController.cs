@@ -18,8 +18,15 @@ namespace AnimDispa.Controllers
             msg.IdAnimaux = id;
             msg.Animal = db.Animaux.Find(id);
             msg.Date = DateTime.Now;
-            msg.IdComptes = 1;
-            msg.Compte = db.Comptes.Find(1);
+            if (Session["IdConnecte"] != null)
+            {
+                msg.IdComptes = Convert.ToInt32(Session["IdConnecte"]);
+            }
+            else
+            {
+                msg.IdComptes = 7;
+            }
+            msg.Compte = db.Comptes.Find(msg.IdComptes);
 
             db.Messages.Add(msg);
             db.SaveChanges();

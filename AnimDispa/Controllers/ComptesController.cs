@@ -46,10 +46,12 @@ namespace AnimDispa.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Prenom,Login,Password,Mail,Telephone,Adresse,CodePostal,Ville")] Comptes comptes)
+        public ActionResult Create([Bind(Include = "Id,Nom,Prenom,Login,Password,Mail,Tel,Adresse,CodePostal,Ville")] Comptes comptes)
         {
             if (ModelState.IsValid)
             {
+                comptes.idRoles = 2;
+                comptes.idStatutsComptes = 1;
                 db.Comptes.Add(comptes);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -141,9 +143,16 @@ namespace AnimDispa.Controllers
                 if (comp.Count == 0)
                 {
                     return View();
-                    
+
                 }
-                return RedirectToAction("Index");
+                else
+                {
+
+                    var compteId = db.Comptes.Where(x => x.Login == login).Where(x => x.Password == password).First();
+                    Session["IdConnecte"] = compteId.Id;
+                    return RedirectToAction("Index");
+                }
+
             }
 
             return View();
