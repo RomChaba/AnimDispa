@@ -25,6 +25,7 @@ namespace AnimDispa.Models
         public System.Data.Entity.DbSet<AnimDispa.Models.Messages> Messages { get; set; }
         public System.Data.Entity.DbSet<AnimDispa.Models.Types> Types { get; set; }
         public System.Data.Entity.DbSet<AnimDispa.Models.Races> Races { get; set; }
+        public System.Data.Entity.DbSet<AnimDispa.Models.Config> Config { get; set; }
 
         public System.Data.Entity.DbSet<AnimDispa.Models.StatutsComptes> StatutsComptes { get; set; }
         public System.Data.Entity.DbSet<AnimDispa.Models.Roles> Roles { get; set; }

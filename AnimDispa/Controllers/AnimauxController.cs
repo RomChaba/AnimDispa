@@ -16,10 +16,13 @@ namespace AnimDispa.Controllers
             var model = new ViewModelAnimaux()
             {
                 animal = db.Animaux.Find(id),
-                lesMessages = db.Messages.Where(x => x.Animal.Id == id).ToList()
+                lesMessages = db.Messages.Where(x => x.Animal.Id == id).ToList(),
+                conf = db.Config.Find(1)
             };
             
             return View(model);
         }
-    }
+        public ActionResult Add() {
+            return View();
+        }
 }
