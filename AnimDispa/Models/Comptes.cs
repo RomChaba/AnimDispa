@@ -26,7 +26,7 @@ namespace AnimDispa.Models
 
         public int idStatutsComptes { get; set; }
         [ForeignKey(nameof(idStatutsComptes))]
-        public virtual StatutsComptes  StatutCompte { get; set; }
+        public virtual StatutsComptes StatutCompte { get; set; }
 
         public virtual ICollection<Animaux> LesAnimaux { get; set; }
         public virtual ICollection<Messages> LesMessages { get; set; }

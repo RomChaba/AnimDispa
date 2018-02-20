@@ -67,23 +67,7 @@ namespace AnimDispa.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             Comptes comptes = db.Comptes.Find(id);
-
-            List<SelectListItem> Stat = new List<SelectListItem>();
-            foreach (var item in db.StatutsComptes.ToList())
-            {
-                Stat.Add(new SelectListItem() { Text = item.Libelle, Value = item.Id.ToString() });
-            }
-            ViewData["idStatutsComptes"] = Stat;
-
-            List<SelectListItem> Rol = new List<SelectListItem>();
-            foreach (var item in db.Roles.ToList())
-            {
-                Rol.Add(new SelectListItem() { Text = item.Libelle, Value = item.Id.ToString() });
-            }
-            ViewData["idRoles"] = Rol;
-
             if (comptes == null)
             {
                 return HttpNotFound();
@@ -96,15 +80,10 @@ namespace AnimDispa.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Prenom,Login,Password,Mail,Tel,Adresse,CodePostal,Ville,idStatutsComptes,idRoles")] Comptes comptes)
+        public ActionResult Edit([Bind(Include = "Id,Nom,Prenom,Login,Password,Mail,Telephone,Adresse,CodePostal,Ville")] Comptes comptes)
         {
             if (ModelState.IsValid)
             {
-                comptes.Role = db.Roles.Where(x => x.Id == comptes.idRoles).First();
-
-                comptes.StatutCompte = db.StatutsComptes.Where(x => x.Id == comptes.idStatutsComptes).First();
-
-
                 db.Entry(comptes).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
