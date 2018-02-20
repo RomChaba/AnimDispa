@@ -40,16 +40,14 @@ namespace AnimDispa.Controllers
 
         // ####################################################################
         // Add
-        public ActionResult Add(int id)
-        {
+        public ActionResult Add(int id) {
 
             return View(db.Types.Find(id));
         }
 
 
         // AddConfirm
-        public ActionResult AddConfirm(String libelle, int idType)
-        {
+        public ActionResult AddConfirm(String libelle, int idType) {
 
             Races race = new Races();
             race.Libelle = libelle;
@@ -60,6 +58,18 @@ namespace AnimDispa.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index", "Races", new { id = idType });
+        }
+
+
+        // ####################################################################
+        // Delete
+        public ActionResult Delete(int id) {
+
+            Races race = db.Races.Find(id);
+            db.Races.Remove(race);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Races", new { id = race.IdType });
         }
     }
 }

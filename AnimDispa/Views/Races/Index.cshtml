@@ -1,11 +1,11 @@
 ﻿@model AnimDispa.Models.Types
-
+<!--onclick="return confirm('Voulez-vous vraiment supprimer ?');"-->
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>@Html.DisplayFor(model => model.Libelle)</h2>
-@Html.ActionLink(" Ajouter une race", "Add", null, htmlAttributes: new { @class = "glyphicon-plus btn btn-primary" })
+@Html.ActionLink(" Ajouter une race", "Add", new { id = Model.Id }, htmlAttributes: new { @class = "glyphicon-plus btn btn-primary" })
 <br /><br />
 
 <div>
@@ -17,9 +17,13 @@
                     @Html.DisplayFor(modelItem => item.Libelle)
                 </td>
                 <td style="text-align: right;">
+                    
+                    @if (item.LesAnimaux.Count == 0) {
+                        @Html.ActionLink(" ", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-trash btn btn-danger" })
+                    }
+
                     @Html.ActionLink(" ", "Edit", new { id = item.Id, }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil btn btn-warning" })
-                    <!--@Html.ActionLink(" ", "Index", "Races", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-eye-open btn btn-success" })-->
-                    <!--@Html.ActionLink(" ", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-trash btn btn-danger" })-->
+
                 </td>
             </tr>
         }

@@ -13,5 +13,5 @@
         <input type="text" name="libelle" required class="form-control text-box single-line" value="" />
         <br />
         <input type="submit" class="btn btn-success" />
-        @Html.ActionLink(" Retour", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink(" Retour", "Index", new { Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
 </form>
