@@ -33,8 +33,7 @@
                         <li style="float:right">@Html.ActionLink("Déconnexion", "Deconnexion", "Comptes")</li>
                         if (Convert.ToInt32(Session["compteRole"]) == 1)
                         {
-                            <li>@Html.ActionLink("Les Comptes", "Index", "Comptes")</li>
-                            <li>@Html.ActionLink("Gestion types Animaux", "Index", "Types")</li>
+                            <li>@Html.ActionLink("Gestion", "Index", "Admin")</li>
                                                     }
                     }
                     else

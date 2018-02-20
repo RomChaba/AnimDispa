@@ -78,6 +78,7 @@
 </div>
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1 well">
+     
         @foreach (var item in Model.lesMessages)
         {
             <div>
@@ -93,17 +94,18 @@
                         </td>
                     </tr>
                 </table>
-
-
             </div>
 
         }
-        <form method="POST" action="/Messages/Create">
-            <h3>Laissez un message :</h3>
-            <input type="hidden" name="id" value="@Html.DisplayFor(model => model.animal.Id)" />
-            <textarea class="textarea-full" name="description" required></textarea>
-            <br /><br />
-            <input type="submit" class="btn btn-primary" />
-        </form>
+
+        @if (Session["IdConnecte"] != null || Model.conf.Value == true) {
+            <form method="POST" action="/Messages/Create">
+                <h3>Laissez un message :</h3>
+                <input type="hidden" name="id" value="@Html.DisplayFor(model => model.animal.Id)" />
+                <textarea class="textarea-full" name="description" required></textarea>
+                <br /><br />
+                <input type="submit" class="btn btn-primary" />
+            </form>
+        }
     </div>
 </div>

@@ -1,0 +1,10 @@
+﻿        
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Gestion Administrateur</h1>
+
+@Html.ActionLink(" Gestion des animaux", "Index", "Types", null, htmlAttributes: new { @class = "btn btn-danger" })
+@Html.ActionLink(" Gestion des comptes", "Index", "Comptes", null, htmlAttributes: new { @class = "btn btn-info" })
+@Html.ActionLink(" Gestion des configurations", "Index", "Config", null, htmlAttributes: new { @class = "btn btn-success" })
