@@ -7,22 +7,26 @@ using System.Web.Mvc;
 
 namespace AnimDispa.Controllers
 {
-    public class AnimauxController : Controller {
+    public class AnimauxController : Controller
+    {
 
         private AnimDispaContext db = new AnimDispaContext();
 
         // GET: Animal
-        public ActionResult Index(int id) {
+        public ActionResult Index(int id)
+        {
             var model = new ViewModelAnimaux()
             {
                 animal = db.Animaux.Find(id),
                 lesMessages = db.Messages.Where(x => x.Animal.Id == id).ToList(),
                 conf = db.Config.Find(1)
             };
-            
+
             return View(model);
         }
-        public ActionResult Add() {
+        public ActionResult Add()
+        {
             return View();
         }
+    }
 }
