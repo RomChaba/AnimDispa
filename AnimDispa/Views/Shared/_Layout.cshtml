@@ -24,8 +24,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav" style="width: calc(100% - 88px);   ">
                     <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                    <li>@Html.ActionLink("À propos de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Signaler", "Add", "Animaux")</li>
+                    <!--li>@Html.ActionLink("À propos de", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li-->
 
 
                     @if (Session["IdConnecte"] != null)

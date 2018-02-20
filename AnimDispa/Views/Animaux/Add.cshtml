@@ -1,0 +1,151 @@
+﻿@model AnimDispa.Models.ViewModelAnimauxAdd
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="jumbotron">
+    <h1>AnimDispa</h1>
+    <p class="lead">Site pour déclarer la perte de son animal de compagnie</p>
+</div>
+
+<h2>Signaler un animal perdu</h2>
+<hr />
+
+<div class="form-horizontal">
+
+    <form>
+
+        <!-- NOM -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Nom">Nom</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Nom" name="Nom" type="text" value="">
+            </div>
+        </div>
+
+
+
+        <!-- POIDS -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Nom">Poids (Kg)</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Poids" name="Poids" type="number" step=".01">
+            </div>
+        </div>
+
+
+
+        <!-- COULEUR -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Nom">Couleur</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Couleur" name="Couleur" type="text">
+            </div>
+        </div>
+
+
+
+        <!-- TATOUAGE -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Nom">Tatouage</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Tatouage" name="Tatouage" type="text">
+            </div>
+        </div>
+
+
+
+        <!-- PUCE -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Nom">Puce</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Puce" name="Puce" type="text">
+            </div>
+        </div>
+
+
+
+        <!-- TYPE -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Nom">Type</label>
+            <div class="col-md-10">
+
+                <select id="type" class="form-control text-box single-line" name="Type" required onchange="jsRaces();">
+                    <option></option>
+                    @foreach (var item in Model.lesTypes)
+                    {
+                        <option value="@Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.Libelle)</option>
+
+                    }
+                </select>
+            </div>
+        </div>
+
+
+
+        <!-- RACE -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Nom">Race</label>
+            <div class="col-md-10">
+
+                <select id="race" class="form-control text-box single-line" name="Race" required>
+                    <option></option>
+                    @foreach (var item in Model.lesRaces)
+                    {
+                        <option hidden class="@Html.DisplayFor(modelItem => item.Type.Id)" value="@Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.Libelle)</option>
+
+                    }
+                </select>
+            </div>
+        </div>
+
+
+
+        <!-- Ville -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Nom">Ville</label>
+            <div class="col-md-10">
+                <select class="form-control text-box single-line" name="Ville" required>
+                    <option></option>
+                    @foreach (var item in Model.lesVilles)
+                    {
+                        <option value="@Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.CodePostal)  -  @Html.DisplayFor(modelItem => item.Libelle)</option>
+
+                    }
+                </select>
+            </div>
+        </div>
+
+
+
+        <!-- SUBMIT -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Nom"></label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line btn-primary" type="submit">
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<script type="text/javascript">
+
+    function jsRaces() {
+        var race = document.getElementById("type").selectedIndex;
+        document.getElementById("race").selectedIndex = null;
+        
+        $("#race option").each(function () {
+            if (this.className == race) {
+                this.hidden = false;
+            } else {
+                this.hidden = true;
+            }
+
+        });
+        
+    }
+
+</script>

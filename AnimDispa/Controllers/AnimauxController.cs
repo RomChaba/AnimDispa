@@ -24,9 +24,19 @@ namespace AnimDispa.Controllers
 
             return View(model);
         }
-        public ActionResult Add()
-        {
-            return View();
+        public ActionResult Add() {
+
+
+            var model = new ViewModelAnimauxAdd() {
+                lesVilles = db.Villes.Where(x => x.CodePostal.ToString().Contains("14700")).OrderBy(x => x.CodePostal).ToList(),
+                lesRaces = db.Races.ToList(),
+                lesTypes = db.Types.ToList()
+                
+            };
+
+
+
+            return View(model);
         }
     }
 }
