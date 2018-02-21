@@ -1,0 +1,247 @@
+﻿@model AnimDispa.Models.ViewModelAnimauxEdit
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<style>
+    .statutFont {
+        font-weight: bold;
+        color: #FFF;
+    }
+</style>
+
+<div class="jumbotron">
+    <h1>AnimDispa</h1>
+    <p class="lead">Site pour déclarer la perte de son animal de compagnie</p>
+</div>
+
+<h2>Signaler un animal perdu</h2>
+<hr />
+
+<div class="form-horizontal">
+
+    <form action="/Animaux/EditConfirm" method="POST" enctype="multipart/form-data">
+
+        <input type="hidden" name="id" value="@Html.DisplayFor(x => x.animal.Id)" />
+
+        <!-- NOM -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="nom">Nom</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="nom" name="nom" type="text" value="@Html.DisplayFor(x => x.animal.Nom)">
+            </div>
+        </div>
+
+
+
+        <!-- POIDS -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="poids">Poids (Kg)</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="poids" name="poids" type="number" value="@Html.DisplayFor(x => x.animal.Poids)">
+            </div>
+        </div>
+
+
+
+        <!-- COULEUR -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="couleur">Couleur</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="couleur" name="couleur" type="text" value="@Html.DisplayFor(x => x.animal.Couleur)">
+            </div>
+        </div>
+
+
+
+        <!-- TATOUAGE -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="tatouage">Tatouage</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="tatouage" name="tatouage" type="text" value="@Html.DisplayFor(x => x.animal.Tatouage)">
+            </div>
+        </div>
+
+
+
+        <!-- PUCE -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="puce">Puce</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="puce" name="puce" type="text" value="@Html.DisplayFor(x => x.animal.Puce)">
+            </div>
+        </div>
+
+
+
+        <!-- TYPE -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="type">Type</label>
+            <div class="col-md-10">
+
+                <select id="type" class="form-control text-box single-line" name="type" required onchange="jsRaces();">
+                    <option></option>
+                    @foreach (var item in Model.lesTypes)
+                    {
+                        <option     value="@Html.DisplayFor(modelItem => item.Id)"
+                                    @if (item.Id == Model.animal.Race.Type.Id) {
+                                        @:selected
+	                                }
+                        >
+                            @Html.DisplayFor(modelItem => item.Libelle)
+                        </option>
+
+                    }
+                </select>
+            </div>
+        </div>
+
+
+
+        <!-- RACE -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="race">Race</label>
+            <div class="col-md-10">
+
+                <select id="race" class="form-control text-box single-line" name="race" required>
+                    <option></option>
+                    @foreach (var item in Model.lesRaces) {
+                        <option     class="@Html.DisplayFor(modelItem => item.Type.Id)"
+                                    value="@Html.DisplayFor(modelItem => item.Id)"
+                                    @if (item.Id == Model.animal.Race.Id) {
+                                        @:selected
+	                                }
+                                    @if (item.Type != Model.animal.Race.Type) {
+                                        @:hidden
+	                                }
+                        >
+                            @Html.DisplayFor(modelItem => item.Libelle)
+                        </option>
+
+                    }
+                </select>
+            </div>
+        </div>
+
+
+
+        <!-- STATUT COMPTE -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="type">Statut</label>
+            <div class="col-md-10">
+
+                <select id="statutAnimal" class="form-control text-box single-line statutFont" name="statutAnimal" required style="background-color: @Html.DisplayFor(x => x.animal.StatutAnimal.Couleur)" onchange="changeStatut()">
+
+                    @foreach (var item in Model.LesStatutsAnimaux) {
+
+                        <option value="@Html.DisplayFor(modelItem => item.Id)"
+                                @if (item.Id == Model.animal.StatutAnimal.Id) { @: selected
+                                	                                }>
+                            @Html.DisplayFor(modelItem => item.Libelle)
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+        
+        
+        
+        <hr />
+
+
+
+        <!-- DEPARTEMENT -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="departement">Departement</label>
+            <div class="col-md-10">
+
+                <select id="departement" class="form-control text-box single-line" name="departement" required>
+                    <option></option>
+                    @foreach (var item in Model.lesDepartements)
+                    {
+                        <option     value="@Html.DisplayFor(modelItem => item.Id)"
+                                    @if (item.Id == Model.animal.Departement.Id) {
+                                        @:selected
+	                                }
+                        >
+                            @Html.DisplayFor(modelItem => item.numero) - @Html.DisplayFor(modelItem => item.Libelle)
+                        </option>
+
+                    }
+                </select>
+            </div>
+        </div>
+
+
+
+        <!-- RUE -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="rue">Rue</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="rue" name="rue" type="text" value="@Html.DisplayFor(x => x.animal.Rue)">
+            </div>
+        </div>
+
+
+
+        <!-- CODE POSTAL -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="cp">Code Postal</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="cp" name="cp" type="text" value="@Html.DisplayFor(x => x.animal.CodePostal)">
+            </div>
+        </div>
+
+
+
+        <!-- Ville -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ville">Ville</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="ville" name="ville" type="text" value="@Html.DisplayFor(x => x.animal.Ville)">
+            </div>
+        </div>
+
+
+
+        <!-- SUBMIT -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Nom"></label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line btn-primary" type="submit">
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<script type="text/javascript">
+
+    function jsRaces() {
+        var race = document.getElementById("type").selectedIndex;
+        document.getElementById("race").selectedIndex = null;
+
+        $("#race option").each(function () {
+            if (this.className == race) {
+                this.hidden = false;
+            } else {
+                this.hidden = true;
+            }
+
+        });
+
+    }
+
+    function changeStatut() {
+        var statutCompte = document.getElementById("statutAnimal").selectedIndex;
+
+        if (statutCompte == 1) {
+            document.getElementById("statutAnimal").style.backgroundColor = "#0C0";
+        } else {
+            document.getElementById("statutAnimal").style.backgroundColor = "#C00";
+        }
+    }
+
+</script>

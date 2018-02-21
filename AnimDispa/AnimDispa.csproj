@@ -180,7 +180,7 @@
     <Compile Include="Models\StatutsComptes.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Photos.cs" />
-    <Compile Include="Models\ViewModelAnimauxAdd.cs" />
+    <Compile Include="Models\ViewModelAnimauxEdit.cs" />
     <Compile Include="Models\ViewModelAnimaux.cs" />
     <Compile Include="Models\Departements.cs" />
     <Compile Include="Models\Villes.cs" />
@@ -259,6 +259,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Config\Index.cshtml" />
     <Content Include="Views\Animaux\Add.cshtml" />
+    <Content Include="Views\Animaux\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
