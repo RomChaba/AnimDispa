@@ -21,7 +21,7 @@ namespace AnimDispa.Controllers
             db.Signalements.Add(Sign);
             db.SaveChanges();
             var Sort = Json(Sign);
-            return Sort;
+            return Json(Sort,JsonRequestBehavior.AllowGet);
         }
         // GET: Ajax
         public ActionResult Index()
