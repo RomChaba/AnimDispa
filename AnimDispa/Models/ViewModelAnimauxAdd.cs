@@ -9,7 +9,7 @@ namespace AnimDispa.Models
 
         public IEnumerable<Races> lesRaces { get; set; }
         public IEnumerable<Types> lesTypes { get; set; }
-        public IEnumerable<Villes> lesVilles { get; set; }
-        
+        public IEnumerable<Departements> lesDepartements { get; set; }
+
     }
 }

@@ -181,6 +181,7 @@
     <Compile Include="Models\Photos.cs" />
     <Compile Include="Models\ViewModelAnimauxAdd.cs" />
     <Compile Include="Models\ViewModelAnimaux.cs" />
+    <Compile Include="Models\Departements.cs" />
     <Compile Include="Models\Villes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

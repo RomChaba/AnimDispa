@@ -1,7 +1,7 @@
 ﻿@model AnimDispa.Models.ViewModelAnimauxAdd
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Add";
 }
 
 <div class="jumbotron">
@@ -14,13 +14,13 @@
 
 <div class="form-horizontal">
 
-    <form>
+    <form action="AddConfirm" method="POST" enctype="multipart/form-data">
 
         <!-- NOM -->
         <div class="form-group">
-            <label class="control-label col-md-2" for="Nom">Nom</label>
+            <label class="control-label col-md-2" for="nom">Nom</label>
             <div class="col-md-10">
-                <input class="form-control text-box single-line" id="Nom" name="Nom" type="text" value="">
+                <input class="form-control text-box single-line" id="nom" name="nom" type="text" value="">
             </div>
         </div>
 
@@ -28,9 +28,9 @@
 
         <!-- POIDS -->
         <div class="form-group">
-            <label class="control-label col-md-2" for="Nom">Poids (Kg)</label>
+            <label class="control-label col-md-2" for="poids">Poids (Kg)</label>
             <div class="col-md-10">
-                <input class="form-control text-box single-line" id="Poids" name="Poids" type="number" step=".01">
+                <input class="form-control text-box single-line" id="poids" name="poids" type="number" step=".01">
             </div>
         </div>
 
@@ -38,9 +38,9 @@
 
         <!-- COULEUR -->
         <div class="form-group">
-            <label class="control-label col-md-2" for="Nom">Couleur</label>
+            <label class="control-label col-md-2" for="couleur">Couleur</label>
             <div class="col-md-10">
-                <input class="form-control text-box single-line" id="Couleur" name="Couleur" type="text">
+                <input class="form-control text-box single-line" id="couleur" name="couleur" type="text">
             </div>
         </div>
 
@@ -48,9 +48,9 @@
 
         <!-- TATOUAGE -->
         <div class="form-group">
-            <label class="control-label col-md-2" for="Nom">Tatouage</label>
+            <label class="control-label col-md-2" for="tatouage">Tatouage</label>
             <div class="col-md-10">
-                <input class="form-control text-box single-line" id="Tatouage" name="Tatouage" type="text">
+                <input class="form-control text-box single-line" id="tatouage" name="tatouage" type="text">
             </div>
         </div>
 
@@ -58,9 +58,9 @@
 
         <!-- PUCE -->
         <div class="form-group">
-            <label class="control-label col-md-2" for="Nom">Puce</label>
+            <label class="control-label col-md-2" for="puce">Puce</label>
             <div class="col-md-10">
-                <input class="form-control text-box single-line" id="Puce" name="Puce" type="text">
+                <input class="form-control text-box single-line" id="puce" name="puce" type="text">
             </div>
         </div>
 
@@ -68,10 +68,10 @@
 
         <!-- TYPE -->
         <div class="form-group">
-            <label class="control-label col-md-2" for="Nom">Type</label>
+            <label class="control-label col-md-2" for="type">Type</label>
             <div class="col-md-10">
 
-                <select id="type" class="form-control text-box single-line" name="Type" required onchange="jsRaces();">
+                <select id="type" class="form-control text-box single-line" name="type" required onchange="jsRaces();">
                     <option></option>
                     @foreach (var item in Model.lesTypes)
                     {
@@ -86,10 +86,10 @@
 
         <!-- RACE -->
         <div class="form-group">
-            <label class="control-label col-md-2" for="Nom">Race</label>
+            <label class="control-label col-md-2" for="race">Race</label>
             <div class="col-md-10">
 
-                <select id="race" class="form-control text-box single-line" name="Race" required>
+                <select id="race" class="form-control text-box single-line" name="race" required>
                     <option></option>
                     @foreach (var item in Model.lesRaces)
                     {
@@ -102,18 +102,63 @@
 
 
 
-        <!-- Ville -->
+        <!-- IMAGE -->
         <div class="form-group">
-            <label class="control-label col-md-2" for="Nom">Ville</label>
+            <label class="control-label col-md-2" for="img">Image Principale</label>
             <div class="col-md-10">
-                <select class="form-control text-box single-line" name="Ville" required>
+                <input class="form-control text-box single-line btn-primary" id="img" name="upload" type="file">
+            </div>
+        </div>
+
+
+
+        <hr />
+
+
+
+        <!-- DEPARTEMENT -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="departement">Departement</label>
+            <div class="col-md-10">
+
+                <select id="departement" class="form-control text-box single-line" name="departement" required onchange="jsRaces();">
                     <option></option>
-                    @foreach (var item in Model.lesVilles)
+                    @foreach (var item in Model.lesDepartements)
                     {
-                        <option value="@Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.CodePostal)  -  @Html.DisplayFor(modelItem => item.Libelle)</option>
+                        <option value="@Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.numero) - @Html.DisplayFor(modelItem => item.Libelle)</option>
 
                     }
                 </select>
+            </div>
+        </div>
+
+
+
+        <!-- RUE -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="rue">Rue</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="rue" name="rue" type="text">
+            </div>
+        </div>
+
+
+
+        <!-- CODE POSTAL -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="cp">Code Postal</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="cp" name="cp" type="text">
+            </div>
+        </div>
+
+
+
+        <!-- Ville -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ville">Ville</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="ville" name="ville" type="text">
             </div>
         </div>
 
@@ -136,7 +181,7 @@
     function jsRaces() {
         var race = document.getElementById("type").selectedIndex;
         document.getElementById("race").selectedIndex = null;
-        
+
         $("#race option").each(function () {
             if (this.className == race) {
                 this.hidden = false;
@@ -145,7 +190,7 @@
             }
 
         });
-        
+
     }
 
 </script>
