@@ -17,6 +17,7 @@ namespace AnimDispa.Controllers
         // GET: Animal
         public ActionResult Index(int id)
         {
+
             var model = new ViewModelAnimaux()
             {
                 animal = db.Animaux.Find(id),
