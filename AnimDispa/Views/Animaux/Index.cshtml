@@ -30,6 +30,14 @@
         max-height: 400px;
         padding: 10px;
     }
+
+    .maxheight {
+        max-height: 200px;
+        height: auto;
+        max-width: 100%;
+        width: auto;
+    }
+
 </style>
 
 <div class="row">
@@ -37,7 +45,7 @@
         <table class="table table-condensed table-striped table-bordered">
             <tr>
                 <td class="table-largeur">
-                    <img class="img-responsive" src="~/content/img/@Html.DisplayFor(model => model.animal.PhotoPrincipale)" alt="Image de l'animal'" />
+                    <img class="img-responsive maxheight" src="~/content/img/@Html.DisplayFor(model => model.animal.PhotoPrincipale)" alt="Image de l'animal'" />
                 </td>
                 <td><h1>@Html.DisplayFor(model => model.animal.Nom)</h1></td>
             </tr>

@@ -44,17 +44,8 @@ namespace AnimDispa.Controllers
             return View(model);
         }
 
-        public ActionResult AddConfirm(string nom, decimal poids, string couleur, string tatouage, string puce, int race, string img, int departement, string rue, string cp, string ville, HttpPostedFileBase upload) {
-
-            if (upload != null && upload.ContentLength > 0) {
-                
-                var fileName = Guid.NewGuid() + Path.GetExtension(upload.FileName);
-                string RootFolder = @Server.MapPath("~/content/img");
-                string path = Path.Combine(RootFolder, fileName);
-                upload.SaveAs(path);
-                //db.SubmidtChanges();
-            }
-
+        public ActionResult AddConfirm(string nom, string poids, string couleur, string tatouage, string puce, int race, int departement, string rue, string cp, string ville, HttpPostedFileBase upload) {
+            
             Animaux animal = new Animaux();
             animal.Nom = nom;
             animal.Poids = poids;
@@ -62,16 +53,30 @@ namespace AnimDispa.Controllers
             animal.Tatouage = tatouage;
             animal.Puce = puce;
             animal.Race = db.Races.Find(race);
-            animal.PhotoPrincipale = img;
+            animal.PhotoPrincipale = upload.FileName;
             animal.Departement = db.Departements.Find(departement);
             animal.Rue = rue;
             animal.CodePostal = cp;
             animal.Ville = ville;
             animal.StatutAnimal = db.StatutAnimal.Find(1);
-            animal.Compte = db.Comptes.Find(Session["idConnecte"]);
+
+            if (Session["idConnecte"] != null) {
+                animal.Compte = db.Comptes.Find(Session["idConnecte"]);
+            } else {
+                animal.Compte = db.Comptes.Find(7);
+            }
 
             db.Animaux.Add(animal);
             db.SaveChanges();
+
+
+            if (upload != null && upload.ContentLength > 0) {
+                
+                string RootFolder = @Server.MapPath("~/content/img");
+                string path = Path.Combine(RootFolder, upload.FileName);
+                upload.SaveAs(path);
+            }
+
 
             return RedirectToAction("Index", "Home");
         }

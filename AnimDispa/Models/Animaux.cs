@@ -11,7 +11,7 @@ namespace AnimDispa.Models
         
         public int Id { get; set; }
         public string Nom { get; set; }
-        public decimal Poids { get; set; }
+        public string Poids { get; set; }
         public string Couleur { get; set; }
         public string Tatouage { get; set; }
         public string Puce { get; set; }
@@ -47,7 +47,7 @@ namespace AnimDispa.Models
 
         }
 
-        public Animaux(int id, string nom, decimal poids, string couleur, string tatouage, string puce, string photoPrincipale)
+        public Animaux(int id, string nom, string poids, string couleur, string tatouage, string puce, string photoPrincipale)
         {
             Id = id;
             Nom = nom;

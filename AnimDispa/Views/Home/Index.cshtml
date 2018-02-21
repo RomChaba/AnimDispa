@@ -17,7 +17,18 @@
     .fond-col{
         background-color:#FED88B!important;
     }
+    
+    .maxheight {
+        max-height: 200px;
+        height: auto;
+        max-width: 100%;
+        width: auto;
+    }
 
+    .paddingImg {
+        padding: 0;
+    }
+    
 </style>
 
 
@@ -27,8 +38,10 @@
     @foreach (var item in Model) {
 
         <div class="col-sm-10 col-sm-offset-1 well">
-
-            <img class="col-sm-3 img-responsive" src="~/content/img/@Html.DisplayFor(modelItem => item.PhotoPrincipale)" alt="Image de l'animal'" />
+            <div class="col-sm-3 paddingImg">
+                <img class="img-responsive maxheight" src="~/content/img/@Html.DisplayFor(modelItem => item.PhotoPrincipale)" alt="Image de l'animal'" />
+            </div>
+            
 
             <div class="col-sm-9">
                 <h3 style="margin-top:0px">@Html.DisplayFor(modelItem => item.Nom) - (@Html.DisplayFor(modelItem => item.Race.Type.Libelle))<i class="pull-right" style="color : @Html.DisplayFor(modelItem => item.StatutAnimal.Couleur)">@Html.DisplayFor(modelItem => item.StatutAnimal.Libelle)</i></h3>

@@ -30,7 +30,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="poids">Poids (Kg)</label>
             <div class="col-md-10">
-                <input class="form-control text-box single-line" id="poids" name="poids" type="number" step=".01">
+                <input class="form-control text-box single-line" id="poids" name="poids" type="number">
             </div>
         </div>
 
@@ -106,7 +106,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="img">Image Principale</label>
             <div class="col-md-10">
-                <input class="form-control text-box single-line btn-primary" id="img" name="upload" type="file">
+                <input class="form-control text-box single-line btn-primary" required id="img" name="upload" type="file">
             </div>
         </div>
 
@@ -121,7 +121,7 @@
             <label class="control-label col-md-2" for="departement">Departement</label>
             <div class="col-md-10">
 
-                <select id="departement" class="form-control text-box single-line" name="departement" required onchange="jsRaces();">
+                <select id="departement" class="form-control text-box single-line" name="departement" required>
                     <option></option>
                     @foreach (var item in Model.lesDepartements)
                     {
