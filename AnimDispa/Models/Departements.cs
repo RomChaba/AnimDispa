@@ -6,15 +6,15 @@ using System.Web;
 
 namespace AnimDispa.Models
 {
-    public class Villes {
+    public class Departements
+    {
 
         public int Id { get; set; }
+        public string numero { get; set; }
         public string Libelle { get; set; }
-        public int CodePostal { get; set; }
-
-        
 
 
+        public virtual ICollection<Animaux> LesAnimaux { get; set; }
 
 
 
@@ -22,15 +22,11 @@ namespace AnimDispa.Models
 
 
 
-        public Villes() {
+
+
+        public Departements() {
             
         }
-
-        public Villes(int id, string libelle, int cp)
-        {
-            Id = id;
-            Libelle = libelle;
-            CodePostal = cp;
-        }
+        
     }
 }

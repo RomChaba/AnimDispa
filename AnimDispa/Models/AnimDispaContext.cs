@@ -28,7 +28,9 @@ namespace AnimDispa.Models
         public System.Data.Entity.DbSet<AnimDispa.Models.Config> Config { get; set; }
 
         public System.Data.Entity.DbSet<AnimDispa.Models.StatutsComptes> StatutsComptes { get; set; }
+        public System.Data.Entity.DbSet<AnimDispa.Models.StatutsAnimaux> StatutAnimal { get; set; }
         public System.Data.Entity.DbSet<AnimDispa.Models.Roles> Roles { get; set; }
+        public System.Data.Entity.DbSet<AnimDispa.Models.Departements> Departements { get; set; }
         public System.Data.Entity.DbSet<AnimDispa.Models.Signalements> Signalements { get; set; }
 
     }

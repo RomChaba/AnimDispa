@@ -16,11 +16,17 @@ namespace AnimDispa.Models
         public string Tatouage { get; set; }
         public string Puce { get; set; }
         public string PhotoPrincipale { get; set; }
-        
-        public int IdVille { get; set; }
-        [ForeignKey(nameof(IdVille))]
-        public virtual Villes Ville { get; set; }
+        public string Rue { get; set; }
+        public string CodePostal { get; set; }
+        public string Ville { get; set; }
 
+
+
+
+        public int IdDepartement { get; set; }
+        [ForeignKey(nameof(IdDepartement))]
+        public virtual Departements Departement { get; set; }
+        
         public int IdRaces { get; set; }
         [ForeignKey(nameof(IdRaces))]
         public virtual Races Race { get; set; }
