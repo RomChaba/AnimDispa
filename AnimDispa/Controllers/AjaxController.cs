@@ -10,12 +10,12 @@ namespace AnimDispa.Controllers
     public class AjaxController : Controller
     {
         private AnimDispaContext db = new AnimDispaContext();
-        public JsonResult MarkerAdd(float? lat, float? lgt, int? idAnim)
+        public JsonResult MarkerAdd(string lat, string lgt, int? idAnim)
         {
             Signalements Sign = new Signalements();
             Sign.Date = DateTime.Now;
-            Sign.Latitude = (float)lat;
-            Sign.Longitude = (float)lgt;
+            Sign.Latitude = lat;
+            Sign.Longitude = lgt;
             Sign.IdAnimaux = (int)idAnim;
             Sign.Animaux = db.Animaux.Find(idAnim);
             db.Signalements.Add(Sign);

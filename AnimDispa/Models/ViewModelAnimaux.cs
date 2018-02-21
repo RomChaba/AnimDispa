@@ -14,6 +14,6 @@ namespace AnimDispa.Models
 
         public Config conf { get; set; }
 
-        public ICollection<Signalements> ListeMarker { get; set; }
+        public IEnumerable<Signalements> ListeMarker { get; set; }
     }
 }
