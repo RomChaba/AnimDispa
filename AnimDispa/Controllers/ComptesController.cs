@@ -73,14 +73,31 @@ namespace AnimDispa.Controllers
             List<SelectListItem> Stat = new List<SelectListItem>();
             foreach (var item in db.StatutsComptes.ToList())
             {
-                Stat.Add(new SelectListItem() { Text = item.Libelle, Value = item.Id.ToString() });
+                if (comptes.idRoles == item.Id)
+                {
+                    Stat.Add(new SelectListItem() { Text = item.Libelle, Value = item.Id.ToString(), Selected = true });
+                }
+                else
+                {
+                    Stat.Add(new SelectListItem() { Text = item.Libelle, Value = item.Id.ToString()});
+                }
+                
             }
             ViewData["idStatutsComptes"] = Stat;
 
             List<SelectListItem> Rol = new List<SelectListItem>();
             foreach (var item in db.Roles.ToList())
             {
-                Rol.Add(new SelectListItem() { Text = item.Libelle, Value = item.Id.ToString() });
+                if (comptes.idStatutsComptes == item.Id)
+                {
+                    Rol.Add(new SelectListItem() { Text = item.Libelle, Value = item.Id.ToString(),Selected = true });
+                }
+                else
+                {
+                    Rol.Add(new SelectListItem() { Text = item.Libelle, Value = item.Id.ToString() });
+                }
+
+                
             }
             ViewData["idRoles"] = Rol;
 

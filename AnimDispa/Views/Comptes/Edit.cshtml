@@ -93,23 +93,23 @@
             @Html.LabelFor(model => model.StatutCompte, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 
-                @Html.DropDownList("idStatutsComptes", String.Empty)
-                @Html.ValidationMessageFor(model => model.StatutCompte, "", new { @class = "text-danger" })
-            </div>
+                @Html.DropDownList("idStatutsComptes", (IEnumerable<SelectListItem>)ViewBag.PriorityID, String.Empty, new { @class= "form-control" })
+                    @Html.ValidationMessageFor(model => model.StatutCompte, "", new { @class = "text-danger" })
+</div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
-                @Html.DropDownList("idRoles", String.Empty)
+                @Html.DropDownList("idRoles", (IEnumerable<SelectListItem>)ViewBag.PriorityID, String.Empty, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="col-md-offset-2 col-md-3">
+                <input type="submit" value="Save" class="btn btn-primary pull-right" />
             </div>
         </div>
     </div>

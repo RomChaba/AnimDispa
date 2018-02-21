@@ -13,5 +13,7 @@ namespace AnimDispa.Models
         public IEnumerable<Messages> lesMessages { get; set; }
 
         public Config conf { get; set; }
+
+        public ICollection<Signalements> ListeMarker { get; set; }
     }
 }

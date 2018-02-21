@@ -19,7 +19,8 @@ namespace AnimDispa.Controllers
             {
                 animal = db.Animaux.Find(id),
                 lesMessages = db.Messages.Where(x => x.Animal.Id == id).ToList(),
-                conf = db.Config.Find(1)
+                conf = db.Config.Find(1),
+                ListeMarker = db.Signalements.Where(x => x.IdAnimaux == id).ToList()
             };
 
             return View(model);

@@ -1,5 +1,5 @@
 ﻿@model AnimDispa.Models.ViewModelAnimaux
-        
+
 @{
     ViewBag.Title = "Index";
 }
@@ -10,12 +10,12 @@
 </div>
 
 <style>
-    .table-largeur{
+    .table-largeur {
         width: 50%;
     }
 
     .enteteMsg {
-        width : 25%;
+        width: 25%;
     }
 
     .listMsg {
@@ -74,11 +74,97 @@
                 <td style="color: @Html.DisplayFor(model => model.animal.StatutAnimal.Couleur); font-weight:bold;">@Html.DisplayFor(model => model.animal.StatutAnimal.Libelle)</td>
             </tr>
         </table>
+        <div class="col-md-12">
+            <div id="googleMap" style="width:100%;height:400px;"></div>
+
+            
+            
+            
+            <script>
+                function myMap() {
+                    var mapProp = {
+                        center: new google.maps.LatLng(47.2261879, -1.6224669),
+                        zoom: 15,
+                    };
+                    var myLatLng = { lat: 47.2261879, lng: -1.6224669 };
+
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        draggable: true,
+                        animation: google.maps.Animation.DROP,
+                        position: myLatLng
+                    });
+                    marker.addListener('click', toggleBounce);
+
+                    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                    google.maps.event.addListener(map, 'click', function (event) {
+                        var myLatLng = event.latLng;
+                        var lat = myLatLng.lat();
+                        var lng = myLatLng.lng();
+                        console.log(myLatLng);
+                        //alert("lat : " + lat + " long : " + lng)
+
+
+                        
+                        console.log("Avant le ajax");
+                        if (confirm("Avez-vous bien vu l'animal ?")) {
+                            addMarker(event.latLng, map);
+                            $.ajax({
+                                method: "GET",
+                                url: "@Url.Action("MarkerAdd", "Ajax", new { })",
+                                data: { lat: lat , idAnim: @Model.animal.Id , lgt: lng }
+                            })
+                            .done(function (msg) {
+                                alert("Data Saved: " + msg);
+                            });
+                        }
+                    });
+
+
+                    marker.setMap(map);
+                }
+
+
+
+
+                function addMarker(location, map) {
+                    var marker = new google.maps.Marker({
+                        position: location,
+                        map: map
+                    });
+                }
+
+                function toggleBounce() {
+                    if (marker.getAnimation() !== null) {
+                        marker.setAnimation(null);
+                    } else {
+                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                    }
+                }
+            </script>
+            @{
+                    foreach (var item in Model.ListeMarker)
+                    {
+
+                        var coord = item.Longitude +";"+ item.Latitude;
+
+                    <script>
+                        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                        addMarker(coord, map);
+                    </script>
+                }
+            }
+
+
+
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZi1BzZ5hzvr_BOe2Z6Dh0W2xxgOvLcx0&callback=myMap"></script>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1 well">
-     
+
         @foreach (var item in Model.lesMessages)
         {
             <div>
@@ -98,7 +184,8 @@
 
         }
 
-        @if (Session["IdConnecte"] != null || Model.conf.Value == true) {
+        @if (Session["IdConnecte"] != null || Model.conf.Value == true)
+        {
             <form method="POST" action="/Messages/Create">
                 <h3>Laissez un message :</h3>
                 <input type="hidden" name="id" value="@Html.DisplayFor(model => model.animal.Id)" />
