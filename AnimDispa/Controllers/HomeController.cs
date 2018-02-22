@@ -10,15 +10,32 @@ using AnimDispa.Models;
 
 namespace AnimDispa.Controllers
 {
-    public class HomeController : Controller
-    {
+    public class HomeController : Controller {
+
+
         private AnimDispaContext db = new AnimDispaContext();
 
-        public ActionResult Index()
-        {
-            return View (db.Animaux
-                            .Where(x => x.StatutAnimal.Libelle.Contains("Perdu"))
-                            .ToList());
+        public ActionResult Index(string nom, string idStatut, string idType) {
+
+            if (idStatut == null) { idStatut = "1"; }
+            if (idType == null) { idType = ""; }
+            if (nom == null) { nom = ""; }
+            
+            var model = new ViewModelListeAnimaux() {
+
+                animaux = db.Animaux
+                            .Where(x => x.StatutAnimal.Id.ToString().Contains(idStatut))
+                            .Where(x => x.Race.Type.Id.ToString().Contains(idType))
+                            .Where(x => x.Nom.Contains(nom))
+                            .ToList(),
+                LesTypes = db.Types.ToList(),
+                LesStatuts = db.StatutAnimal.ToList(),
+                Nom = nom,
+                IdStatut = idStatut,
+                IdType = idType
+            };
+
+            return View(model);
         }
 
         public ActionResult About()

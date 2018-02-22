@@ -180,6 +180,7 @@
     <Compile Include="Models\StatutsComptes.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Photos.cs" />
+    <Compile Include="Models\ViewModelListeAnimaux.cs" />
     <Compile Include="Models\ViewModelAnimauxEdit.cs" />
     <Compile Include="Models\ViewModelAnimaux.cs" />
     <Compile Include="Models\Departements.cs" />
